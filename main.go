@@ -1,30 +1,15 @@
 package main
 
 // func main() {
-// 	stk := ds.NewStack[int]()
+// 	q := ds.NewQueue[int]()
 
-// 	stk.Push(1)
-// 	stk.Push(2)
-// 	stk.Push(3)
-// 	stk.Push(4)
-// 	stk.Push(5)
+// 	q.Push(1)
+// 	q.Push(2)
+// 	q.Push(3)
+// 	q.Push(4)
 
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
-
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
-
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
-
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
-
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
-
-// 	stk.Pop()
-// 	fmt.Println(stk.String())
+// 	for val, err := q.Pop(); err == nil; val, err = q.Pop() {
+// 		fmt.Println(*val, " ", q.String())
+// 	}
 
 // }

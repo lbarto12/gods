@@ -45,7 +45,8 @@ func (lst *List[T]) PushFront(val T) T {
 	}
 	if lst.head.next != nil {
 		lst.head.next.prev = lst.head
-
+	} else {
+		lst.tail = lst.head
 	}
 	return val
 }
