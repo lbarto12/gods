@@ -21,5 +21,3 @@ func (q *Queue[T]) Push(val T) T {
 func (q *Queue[T]) Pop() (*T, error) {
 	return q.items.PopBack()
 }
-
-// tst
