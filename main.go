@@ -1,5 +1,11 @@
 package main
 
+import (
+	"fmt"
+
+	"github.com/lbarto12/gods/itertools"
+)
+
 // func main() {
 // 	q := ds.NewQueue[int]()
 
@@ -14,8 +20,21 @@ package main
 
 // }
 
-// func main() {
-// 	counts := ds.NewCounter(ds.StringArray("hello world")).Get()
+func main() {
 
-// 	fmt.Println(counts)
-// }
+	arr := []int{1, 2, 3, 4, 5}
+
+	nw := itertools.Filter(arr, func(a int) bool {
+		return a%2 == 0
+	})
+
+	fmt.Println(nw)
+
+	arr2 := []int{6, 7, 8, 9, 10}
+	arr3 := []int{12, 13, 14, 15, 16}
+
+	zp := itertools.Zip(arr, arr2, arr3)
+
+	fmt.Println(zp)
+
+}
