@@ -13,3 +13,9 @@ package main
 // 	}
 
 // }
+
+// func main() {
+// 	counts := ds.NewCounter(ds.StringArray("hello world")).Get()
+
+// 	fmt.Println(counts)
+// }
