@@ -2,7 +2,6 @@ package ds
 
 import (
 	"math"
-	"strings"
 )
 
 type Counter[T comparable] struct {
@@ -57,9 +56,4 @@ func (c Counter[T]) Min() T {
 	}
 
 	return key
-}
-
-// external
-func StringArray(s string) []string {
-	return strings.Split(s, "")
 }

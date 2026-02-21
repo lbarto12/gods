@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/lbarto12/gods/itertools"
+	"github.com/lbarto12/gods/ds"
 )
 
 // func main() {
@@ -22,19 +22,20 @@ import (
 
 func main() {
 
-	arr := []int{1, 2, 3, 4, 5}
+	lst := ds.NewList[int]()
 
-	nw := itertools.Filter(arr, func(a int) bool {
-		return a%2 == 0
-	})
+	lst.PushFront(1)
+	lst.PushFront(2)
+	lst.PushFront(3)
+	lst.PushFront(4)
 
-	fmt.Println(nw)
+	fmt.Println(lst.DumpSlice())
 
-	arr2 := []int{6, 7, 8, 9, 10}
-	arr3 := []int{12, 13, 14, 15, 16}
+	fmt.Println(lst.String())
+	for v := range lst.Iter() {
+		fmt.Println(v)
+	}
 
-	zp := itertools.Zip(arr, arr2, arr3)
-
-	fmt.Println(zp)
+	fmt.Println(lst.String())
 
 }

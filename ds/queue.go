@@ -21,3 +21,26 @@ func (q *Queue[T]) Push(val T) T {
 func (q *Queue[T]) Pop() (*T, error) {
 	return q.items.PopBack()
 }
+
+// Inherits
+
+// control
+func (q *Queue[T]) Copy() *Queue[T] {
+	return &Queue[T]{
+		items: q.items.Copy(),
+	}
+}
+
+// data
+func (q *Queue[T]) DumpSlice() []T {
+	return q.items.DumpSlice()
+}
+
+// iterator
+func (q *Queue[T]) Iter() func(yield func(T) bool) {
+	return q.items.Iter()
+}
+
+func (q *Queue[T]) IterPop() func(yield func(T) bool) {
+	return q.items.IterPop()
+}

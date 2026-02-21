@@ -1,7 +1,6 @@
 package ds
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -19,10 +18,6 @@ type List[T any] struct {
 func NewList[T any]() *List[T] {
 	return &List[T]{}
 }
-
-var ( // Errors
-	ErrNoItems = errors.New("no items found")
-)
 
 func (lst *List[T]) String() string {
 	if lst.head == nil {
@@ -100,4 +95,69 @@ func (lst *List[T]) PopBack() (*T, error) {
 	}
 
 	return &store, nil
+}
+
+// mem control
+
+func copy_driver[T any](o *list_node[T]) (*list_node[T], *list_node[T]) {
+	if o == nil {
+		return nil, nil
+	}
+	if o.next == nil {
+		return o, o
+	}
+	nxt, tail := copy_driver(o.next)
+	newnode := &list_node[T]{
+		val:  o.val,
+		next: nxt,
+	}
+	if newnode.next != nil {
+		newnode.next.prev = newnode
+	}
+
+	return newnode, tail
+}
+
+func (lst *List[T]) Copy() *List[T] {
+	head, tail := copy_driver(lst.head)
+	return &List[T]{
+		head: head,
+		tail: tail,
+	}
+}
+
+// data
+func (lst *List[T]) DumpSlice() []T {
+	temp := lst.Copy()
+	res := []T{}
+	for val := range temp.IterPop() {
+		res = append(res, val)
+	}
+	return res
+}
+
+// Iterators
+func (lst *List[T]) Iter() func(yield func(T) bool) {
+	return func(yield func(T) bool) {
+		cpy := lst.Copy()
+		for v := range cpy.IterPop() {
+			if !yield(v) {
+				return
+			}
+		}
+	}
+}
+
+func (lst *List[T]) IterPop() func(yield func(T) bool) {
+	return func(yield func(T) bool) {
+		for true {
+			elem, err := lst.PopFront()
+			if err != nil {
+				break
+			}
+			if !yield(*elem) {
+				return
+			}
+		}
+	}
 }
