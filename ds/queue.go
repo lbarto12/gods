@@ -36,6 +36,10 @@ func (q *Queue[T]) DumpSlice() []T {
 	return q.items.DumpSlice()
 }
 
+func (q *Queue[T]) Len() uint64 {
+	return q.items.Len()
+}
+
 // iterator
 func (q *Queue[T]) Iter() func(yield func(T) bool) {
 	return q.items.Iter()

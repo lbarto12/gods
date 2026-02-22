@@ -38,4 +38,10 @@ func main() {
 
 	fmt.Println(lst.String())
 
+	lst.PopFront()
+	lst.PopBack()
+	lst.PushBack(2)
+
+	fmt.Println(lst.Len())
+
 }

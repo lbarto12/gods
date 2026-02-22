@@ -25,22 +25,26 @@ func (stk *Stack[T]) Pop() (*T, error) {
 // Inherits
 
 // control
-func (q *Stack[T]) Copy() *Stack[T] {
+func (stk *Stack[T]) Copy() *Stack[T] {
 	return &Stack[T]{
-		items: q.items.Copy(),
+		items: stk.items.Copy(),
 	}
 }
 
 // data
-func (q *Stack[T]) DumpSlice() []T {
-	return q.items.DumpSlice()
+func (stk *Stack[T]) DumpSlice() []T {
+	return stk.items.DumpSlice()
+}
+
+func (stk *Stack[T]) Len() uint64 {
+	return stk.items.Len()
 }
 
 // iterator
-func (q *Stack[T]) Iter() func(yield func(T) bool) {
-	return q.items.Iter()
+func (stk *Stack[T]) Iter() func(yield func(T) bool) {
+	return stk.items.Iter()
 }
 
-func (q *Stack[T]) IterPop() func(yield func(T) bool) {
-	return q.items.IterPop()
+func (stk *Stack[T]) IterPop() func(yield func(T) bool) {
+	return stk.items.IterPop()
 }

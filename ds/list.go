@@ -13,10 +13,13 @@ type list_node[T any] struct {
 type List[T any] struct {
 	head *list_node[T]
 	tail *list_node[T]
+	size uint64
 }
 
 func NewList[T any]() *List[T] {
-	return &List[T]{}
+	return &List[T]{
+		size: 0,
+	}
 }
 
 func (lst *List[T]) String() string {
@@ -43,6 +46,7 @@ func (lst *List[T]) PushFront(val T) T {
 	} else {
 		lst.tail = lst.head
 	}
+	lst.size++
 	return val
 }
 
@@ -58,6 +62,7 @@ func (lst *List[T]) PopFront() (*T, error) {
 	} else {
 		lst.tail = nil
 	}
+	lst.size--
 	return &store.val, nil
 }
 
@@ -69,6 +74,7 @@ func (lst *List[T]) PushBack(val T) T {
 			prev: nil,
 		}
 		lst.tail = lst.head
+		lst.size++
 		return val
 	}
 
@@ -78,6 +84,7 @@ func (lst *List[T]) PushBack(val T) T {
 		prev: lst.tail,
 	}
 	lst.tail = lst.tail.next
+	lst.size++
 	return val
 }
 
@@ -93,7 +100,7 @@ func (lst *List[T]) PopBack() (*T, error) {
 	} else {
 		lst.head = nil
 	}
-
+	lst.size--
 	return &store, nil
 }
 
@@ -123,6 +130,7 @@ func (lst *List[T]) Copy() *List[T] {
 	return &List[T]{
 		head: head,
 		tail: tail,
+		size: lst.size,
 	}
 }
 
@@ -134,6 +142,10 @@ func (lst *List[T]) DumpSlice() []T {
 		res = append(res, val)
 	}
 	return res
+}
+
+func (lst *List[T]) Len() uint64 {
+	return lst.size
 }
 
 // Iterators
