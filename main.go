@@ -31,5 +31,15 @@ func main() {
 	bst.Insert(12)
 	bst.Insert(20)
 
+	bst.Remove(10)
+	bst.Remove(7)
+	bst.Remove(15)
+
 	fmt.Println(bst.String())
+
+	mx, _ := bst.Max()
+	mn, _ := bst.Min()
+
+	fmt.Println(*mx)
+	fmt.Println(*mn)
 }

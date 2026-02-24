@@ -2,6 +2,7 @@ package ds
 
 import (
 	"cmp"
+	"errors"
 	"fmt"
 
 	"github.com/lbarto12/gods/util"
@@ -29,34 +30,96 @@ func NewBSTWithComparator[T cmp.Ordered](comparator util.Comparator[T]) *BST[T] 
 	}
 }
 
-func (bst *BST[T]) insert_driver(node **bst_node[T], val T) T {
+// errors
+var (
+	ErrKeyNotFound = errors.New("key not found in tree")
+	ErrTreeEmpty   = errors.New("tree is empty")
+)
+
+// Methods
+
+func (bst *BST[T]) find_ptr(node **bst_node[T], key T) **bst_node[T] {
+	if *node == nil {
+		return node
+	}
+
+	comp := bst.comparator(key, (*node).val)
+	switch {
+	case comp < 0:
+		return bst.find_ptr(&(*node).left, key)
+	case comp > 0:
+		return bst.find_ptr(&(*node).right, key)
+	}
+
+	return node
+}
+
+func (bst *BST[T]) find_max(node *bst_node[T]) *bst_node[T] {
+	if node.right == nil {
+		return node
+	}
+	return bst.find_max(node.right)
+}
+
+func (bst *BST[T]) find_min(node *bst_node[T]) *bst_node[T] {
+	if node.left == nil {
+		return node
+	}
+	return bst.find_min(node.left)
+}
+
+// INSERT
+func (bst *BST[T]) Insert(val T) T {
+	node := bst.find_ptr(&bst.root, val)
 	if *node == nil {
 		*node = &bst_node[T]{
 			val: val,
 		}
-		return val
-	}
-
-	comp := bst.comparator(val, (*node).val)
-	switch {
-	case comp < 0:
-		return bst.insert_driver(&(*node).left, val)
-	case comp > 0:
-		return bst.insert_driver(&(*node).right, val)
-	case comp == 0: // change existing
+	} else {
 		(*node).val = val
-		return (*node).val
 	}
-
-	return val
+	return (*node).val
 }
 
-// Methods
-func (bst *BST[T]) Insert(val T) T {
-	return bst.insert_driver(&bst.root, val)
+// REMOVE
+func (bst *BST[T]) remove_driver(node **bst_node[T], val T) error {
+	del := bst.find_ptr(node, val)
+	if *del == nil {
+		return ErrKeyNotFound
+	}
+
+	if (*del).left == nil { // No children, or one node on right
+		(*del) = (*del).right // Fold right upwards
+	} else if (*del).right == nil { // Only left child
+		(*del) = (*del).left // Fold left upwards
+	} else { // Two children
+		mx_node := bst.find_max((*del).left) // will not be null
+		(*del).val = mx_node.val
+		return bst.remove_driver(&(*del).left, mx_node.val)
+	}
+	return nil
+}
+
+func (bst *BST[T]) Remove(val T) error {
+	return bst.remove_driver(&bst.root, val)
 }
 
 // data
+func (bst *BST[T]) Max() (*T, error) {
+	if bst.root == nil {
+		return nil, ErrNoItems
+	}
+	node := bst.find_max(bst.root)
+	return &node.val, nil
+}
+
+func (bst *BST[T]) Min() (*T, error) {
+	if bst.root == nil {
+		return nil, ErrNoItems
+	}
+	node := bst.find_min(bst.root)
+	return &node.val, nil
+}
 
 // string
 func (bst *BST[T]) to_string(node *bst_node[T]) string {
