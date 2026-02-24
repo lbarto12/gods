@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/lbarto12/gods/ds/tree/bst"
+	"github.com/lbarto12/gods/ds/map/set"
 )
 
 // func main() {
@@ -21,29 +21,11 @@ import (
 // }
 
 func main() {
-	tree := bst.NewBST[int]()
+	st1 := set.New(1, 2, 3)
 
-	tree.Insert(10)
-	tree.Insert(5)
-	tree.Insert(2)
-	tree.Insert(7)
-	tree.Insert(15)
-	tree.Insert(12)
-	tree.Insert(20)
+	fmt.Println(st1)
 
-	tree.Remove(10)
-	tree.Remove(7)
-	tree.Remove(15)
+	st := set.New(1, 2, 3).Union(*set.New(3, 4, 5))
 
-	fmt.Println(tree.String())
-
-	mx, _ := tree.Max()
-	mn, _ := tree.Min()
-
-	fmt.Println(*mx)
-	fmt.Println(*mn)
-
-	val, err := tree.Search(5)
-
-	fmt.Println(*val, err)
+	fmt.Println(st)
 }
