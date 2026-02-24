@@ -42,4 +42,8 @@ func main() {
 
 	fmt.Println(*mx)
 	fmt.Println(*mn)
+
+	val, err := tree.Search(5)
+
+	fmt.Println(*val, err)
 }
