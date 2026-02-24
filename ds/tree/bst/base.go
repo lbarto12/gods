@@ -2,7 +2,6 @@ package bst
 
 import (
 	"cmp"
-	"errors"
 
 	"github.com/lbarto12/gods/util"
 )
@@ -28,9 +27,3 @@ func NewBSTWithComparator[T cmp.Ordered](comparator util.Comparator[T]) *BST[T] 
 		comparator: comparator,
 	}
 }
-
-// errors
-var (
-	ErrKeyNotFound = errors.New("key not found in tree")
-	ErrTreeEmpty   = errors.New("tree is empty")
-)

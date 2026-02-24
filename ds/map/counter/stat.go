@@ -2,8 +2,16 @@ package counter
 
 import "math"
 
-func (c Counter[T]) Get() map[T]uint64 {
+func (c Counter[T]) GetAll() map[T]uint64 {
 	return c.counts
+}
+
+func (c Counter[T]) Get(key T) uint64 {
+
+	if v, ok := c.counts[key]; ok {
+		return v
+	}
+	return 0
 }
 
 func (c Counter[T]) Max() T {

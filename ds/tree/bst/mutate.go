@@ -1,5 +1,7 @@
 package bst
 
+import "github.com/lbarto12/gods/common/godserr"
+
 func (bst *BST[T]) Insert(val T) T {
 	node := bst.find_ptr(&bst.root, val)
 	if *node == nil {
@@ -15,7 +17,7 @@ func (bst *BST[T]) Insert(val T) T {
 func (bst *BST[T]) remove_driver(node **bst_node[T], val T) error {
 	del := bst.find_ptr(node, val)
 	if *del == nil {
-		return ErrKeyNotFound
+		return godserr.ErrKeyNotFound
 	}
 
 	if (*del).left == nil { // No children, or one node on right

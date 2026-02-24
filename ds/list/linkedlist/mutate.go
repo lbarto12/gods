@@ -1,6 +1,8 @@
 package linkedlist
 
-import "github.com/lbarto12/gods/ds"
+import (
+	"github.com/lbarto12/gods/common/godserr"
+)
 
 func (lst *List[T]) PushFront(val T) T {
 	lst.head = &list_node[T]{
@@ -19,7 +21,7 @@ func (lst *List[T]) PushFront(val T) T {
 
 func (lst *List[T]) PopFront() (*T, error) {
 	if lst.head == nil {
-		return nil, ds.ErrNoItems
+		return nil, godserr.ErrNoItems
 	}
 
 	store := lst.head
@@ -57,7 +59,7 @@ func (lst *List[T]) PushBack(val T) T {
 
 func (lst *List[T]) PopBack() (*T, error) {
 	if lst.tail == nil {
-		return nil, ds.ErrNoItems
+		return nil, godserr.ErrNoItems
 	}
 
 	store := lst.tail.val
