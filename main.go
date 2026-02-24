@@ -21,27 +21,15 @@ import (
 // }
 
 func main() {
+	bst := ds.NewBST[int]()
 
-	lst := ds.NewList[int]()
+	bst.Insert(10)
+	bst.Insert(5)
+	bst.Insert(2)
+	bst.Insert(7)
+	bst.Insert(15)
+	bst.Insert(12)
+	bst.Insert(20)
 
-	lst.PushFront(1)
-	lst.PushFront(2)
-	lst.PushFront(3)
-	lst.PushFront(4)
-
-	fmt.Println(lst.DumpSlice())
-
-	fmt.Println(lst.String())
-	for v := range lst.Iter() {
-		fmt.Println(v)
-	}
-
-	fmt.Println(lst.String())
-
-	lst.PopFront()
-	lst.PopBack()
-	lst.PushBack(2)
-
-	fmt.Println(lst.Len())
-
+	fmt.Println(bst.String())
 }
