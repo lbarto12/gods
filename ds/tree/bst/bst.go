@@ -1,4 +1,4 @@
-package ds
+package bst
 
 import (
 	"cmp"
@@ -107,7 +107,7 @@ func (bst *BST[T]) Remove(val T) error {
 // data
 func (bst *BST[T]) Max() (*T, error) {
 	if bst.root == nil {
-		return nil, ErrNoItems
+		return nil, ErrTreeEmpty
 	}
 	node := bst.find_max(bst.root)
 	return &node.val, nil
@@ -115,7 +115,7 @@ func (bst *BST[T]) Max() (*T, error) {
 
 func (bst *BST[T]) Min() (*T, error) {
 	if bst.root == nil {
-		return nil, ErrNoItems
+		return nil, ErrTreeEmpty
 	}
 	node := bst.find_min(bst.root)
 	return &node.val, nil

@@ -1,7 +1,9 @@
-package ds
+package linkedlist
 
 import (
 	"fmt"
+
+	"github.com/lbarto12/gods/ds"
 )
 
 type list_node[T any] struct {
@@ -52,7 +54,7 @@ func (lst *List[T]) PushFront(val T) T {
 
 func (lst *List[T]) PopFront() (*T, error) {
 	if lst.head == nil {
-		return nil, ErrNoItems
+		return nil, ds.ErrNoItems
 	}
 
 	store := lst.head
@@ -90,7 +92,7 @@ func (lst *List[T]) PushBack(val T) T {
 
 func (lst *List[T]) PopBack() (*T, error) {
 	if lst.tail == nil {
-		return nil, ErrNoItems
+		return nil, ds.ErrNoItems
 	}
 
 	store := lst.tail.val

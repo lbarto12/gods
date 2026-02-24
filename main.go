@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/lbarto12/gods/ds"
+	"github.com/lbarto12/gods/ds/tree/bst"
 )
 
 // func main() {
@@ -21,24 +21,24 @@ import (
 // }
 
 func main() {
-	bst := ds.NewBST[int]()
+	tree := bst.NewBST[int]()
 
-	bst.Insert(10)
-	bst.Insert(5)
-	bst.Insert(2)
-	bst.Insert(7)
-	bst.Insert(15)
-	bst.Insert(12)
-	bst.Insert(20)
+	tree.Insert(10)
+	tree.Insert(5)
+	tree.Insert(2)
+	tree.Insert(7)
+	tree.Insert(15)
+	tree.Insert(12)
+	tree.Insert(20)
 
-	bst.Remove(10)
-	bst.Remove(7)
-	bst.Remove(15)
+	tree.Remove(10)
+	tree.Remove(7)
+	tree.Remove(15)
 
-	fmt.Println(bst.String())
+	fmt.Println(tree.String())
 
-	mx, _ := bst.Max()
-	mn, _ := bst.Min()
+	mx, _ := tree.Max()
+	mn, _ := tree.Min()
 
 	fmt.Println(*mx)
 	fmt.Println(*mn)

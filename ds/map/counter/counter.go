@@ -1,4 +1,4 @@
-package ds
+package counter
 
 import (
 	"math"

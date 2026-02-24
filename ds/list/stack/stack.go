@@ -1,12 +1,14 @@
-package ds
+package stack
+
+import "github.com/lbarto12/gods/ds/list/linkedlist"
 
 type Stack[T any] struct {
-	items *List[T]
+	items *linkedlist.List[T]
 }
 
 func NewStack[T any]() *Stack[T] {
 	return &Stack[T]{
-		items: NewList[T](),
+		items: linkedlist.NewList[T](),
 	}
 }
 
