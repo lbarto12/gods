@@ -22,10 +22,7 @@ import (
 
 func main() {
 	st1 := set.New(1, 2, 3)
+	st2 := set.New(3, 4, 5)
 
-	fmt.Println(st1)
-
-	st := set.New(1, 2, 3).Union(*set.New(3, 4, 5))
-
-	fmt.Println(st)
+	fmt.Println(st1.SymDiff(st2))
 }

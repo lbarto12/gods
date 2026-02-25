@@ -1,9 +1,11 @@
 package stack
 
-func (stk *Stack[T]) Iter() func(yield func(T) bool) {
+import "iter"
+
+func (stk *Stack[T]) Iter() iter.Seq[T] {
 	return stk.items.Iter()
 }
 
-func (stk *Stack[T]) IterPop() func(yield func(T) bool) {
+func (stk *Stack[T]) IterPop() iter.Seq[T] {
 	return stk.items.IterPop()
 }

@@ -1,6 +1,8 @@
 package linkedlist
 
-func (lst *List[T]) Iter() func(yield func(T) bool) {
+import "iter"
+
+func (lst *List[T]) Iter() iter.Seq[T] {
 	return func(yield func(T) bool) {
 		cpy := lst.Copy()
 		for v := range cpy.IterPop() {
@@ -11,7 +13,7 @@ func (lst *List[T]) Iter() func(yield func(T) bool) {
 	}
 }
 
-func (lst *List[T]) IterPop() func(yield func(T) bool) {
+func (lst *List[T]) IterPop() iter.Seq[T] {
 	return func(yield func(T) bool) {
 		for true {
 			elem, err := lst.PopFront()
