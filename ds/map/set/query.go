@@ -9,7 +9,7 @@ func (set *Set[T]) IsSubset(other *Set[T]) bool {
 		return false
 	}
 
-	for k := range set.items {
+	for k := range set.Iter() {
 		if !other.Contains(k) {
 			return false
 		}
